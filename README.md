@@ -6,7 +6,7 @@ KiCAD 2(to) QMK is a tool designed to make the process of writing firmware for c
 
 ## Usage
 
-There will eventually be a public version accessible by browser. Please be aware that this is still in development and may not work as expected. If it doesn't work, feel free to open an issue or contact me on Discord (Jels#0139).
+There is an early version available at https://jels02.github.io/kicad2qmk/. Please be aware that this is still in development and may not work as expected. If it doesn't work, feel free to open an issue or contact me on Discord (Jels#0139).
 Use a netlist export from KiCAD (default settings) and a "pos" file (CSV type) to get started.
 Currently there is only explicit support for the RP2040 (The conversion between pin names on the RP2040 symbol (GPIOxx) and the pin names in the QMK firmware (GPxx) is explicit), so other microcontrollers might not have correct pin names. If so, open an Issue and this can be added.
 
