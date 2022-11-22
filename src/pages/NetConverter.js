@@ -70,8 +70,6 @@ export default function NetConverter() {
     setPos(parsed.data);
     if (state) {
       parsePos(parsed.data, state);
-    } else {
-      console.log("No state");
     }
   };
 

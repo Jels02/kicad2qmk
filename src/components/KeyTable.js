@@ -195,7 +195,7 @@ export function KeyTable({ state, setState }) {
 
 export function KeyGrid({ state, pos }) {
   if (state === null || pos === null) {
-    return <h1> No State </h1>;
+    return <h2> No data loaded </h2>;
   }
   const keys = state.keys;
   let height = 0;
