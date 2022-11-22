@@ -1,0 +1,47 @@
+.error {
+  background-color: var(--invalidColor);
+  color: var(--textColor);
+  border: 3px solid var(--buttonColor);
+  border-radius: 5px;
+  height: 15px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.valid {
+  background-color: var(--validColor);
+  color: var(--textColor);
+  border: 3px solid var(--buttonColor);
+  border-radius: 5px;
+  height: 15px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.unknown {
+  background-color: var(--unknownColor);
+  color: var(--textColor);
+  border: 3px solid var(--buttonColor);
+  border-radius: 5px;
+  height: 15px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.listbox {
+  background-color: var(--bgColor);
+  width: 100%;
+}
+
+.item {
+  cursor: pointer;
+  padding: 5px;
+}
+.highlightedItem {
+  cursor: pointer;
+  background-color: var(--buttonColor);
+  padding: 5px;
+}
+
+
+

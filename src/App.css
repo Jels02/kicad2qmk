@@ -1,38 +1,106 @@
+:root {
+	--bgColor: #e7e7e7;
+  --buttonColor: #ADADAD;
+  --textColor: #2B2B2B;
+  --invalidColor: #F09797;
+  --validColor: #97F0A3;
+  --unknownColor: #F0F097;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bgColor: #1A1A1A;
+    --buttonColor: #383838;
+    --buttonColorHover: #2b2b2b;
+    --textColor: #E9E9E9;
+    --invalidColor: #4D1919;
+    --validColor: #1c3a1c;
+    --unknownColor: #3f3f1a;
+	}
+}
+
+
+
 .App {
   text-align: center;
+  background-color: var(--bgColor);
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.intro {
+  width: 50%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.output-box {
+  min-height: 100px;
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+input {
+  background-color: var(--bgColor);
+  color: var(--textColor);
+  border: 3px solid var(--buttonColor);
+  border-radius: 5px;
+  height: 15px;
+  padding: 5px;
+  margin: 5px;
+}
+input.error {
+  background-color: var(--invalidColor);
+}
+input.valid {
+  background-color: var(--validColor);
+}
+input.unknown {
+  background-color: var(--unknownColor);
+}
+button {
+  background-color: var(--buttonColor);
+  color: var(--textColor);
+  border: 0px solid var(--buttonColor);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--buttonColorHover);
+}
+
+label {
+  color: var(--textColor);
+  margin: 5px;
+}
+body {
+  color: var(--textColor);
+}
+.param-inputs {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  margin: 10px;
+}
+.user-input button {
+  margin: 10px;
+}
+
+.user-input {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 75%;
+  height: 90%;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.validFile {
+  background-color: var(--validColor);
+}
+.invalidFile {
+  background-color: var(--invalidColor);
 }
