@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.css": "/kicad2qmk/static/css/main.b4842111.css",
+    "main.js": "/kicad2qmk/static/js/main.b41ee286.js",
+    "index.html": "/kicad2qmk/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.b4842111.css",
+    "static/js/main.b41ee286.js"
+  ]
+}
