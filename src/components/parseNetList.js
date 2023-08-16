@@ -19,7 +19,7 @@ export function parseNet(file, setState, refs) {
   const [nets, matrix, rowNames, colNames] = getMatrix(file, keys);
   const MCU = getMCU(file, nets, rowNames);
   const [rowPins, colPins] = getMCUPins(nets, rowNames, colNames, MCU);
-
+  console.log(rowPins);
   setState((state) => ({
     ...state,
     keys: keys,

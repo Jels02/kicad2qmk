@@ -5,27 +5,56 @@ const bootloaderMap = {
   RP2040: "rp2040",
 };
 
-function matrixToLayout(matrix, rowNames, colNames) {
+function matrixToLayout(keys) {
   const layout = [];
-  rowNames.forEach(({ number, pin }, rowName) => {
+  Array.from(keys).forEach(([keyRef, key]) => {
+    if (key.enabled) {
+      if (!key.matrix) {
+        console.log("Key " + keyRef + " is not mapped to a matrix position");
+      }
+      layout.push({
+        label: key.keycode === "ERROR" ? "" : key.keycode.slice(3),
+        matrix: key.matrix,
+        x: key.x,
+        y: key.y,
+      });
+    }
+  });
+
+  layout.sort((a, b) => {
+    console.log(a, b);
+    return Math.floor(a.y) !== Math.floor(b.y) ? a.y - b.y : a.x - b.x;
+  });
+  console.log(layout);
+  return layout;
+}
+
+const colRowMapToArray = (map) => {
+  const array = Array.from(map, ([key, value]) => [key, value]);
+  return array
+    .sort((a, b) => {
+      return a[0].length !== b[0].length
+        ? a[0].length - b[0].length
+        : a[0] > b[0]
+        ? 1
+        : a[0] < b[0]
+        ? -1
+        : 0;
+    })
+    .map(([_, value]) => value.pin);
+};
+
+export function addRowColNumbers(state) {
+  state.rowNames.forEach(({ number, pin }, rowName) => {
     const rowNumber = number;
-    colNames.forEach(({ number, pin }, colName) => {
-      const key = matrix[rowName][colName];
-      if (key) {
-        if (!key.keycode) {
-          key.keycode = "KC_NO";
-        }
-        layout.push({
-          label: key.keycode === "ERROR" ? "" : key.keycode.slice(3),
-          matrix: [rowNumber, number],
-          x: key.x,
-          y: key.y,
-        });
+    state.colNames.forEach(({ number, pin }, colName) => {
+      const matrixKey = state.matrix[rowName][colName];
+      if (matrixKey) {
+        const key = state.keys.get(matrixKey.ref);
+        key.matrix = [rowNumber, number];
       }
     });
   });
-
-  return layout;
 }
 
 export function writeInfoJson(state, params) {
@@ -56,12 +85,12 @@ export function writeInfoJson(state, params) {
     },
     diode_direction: "COL2ROW", // TODO make this computed
     matrix_pins: {
-      cols: state.colPins,
-      rows: state.rowPins,
+      cols: colRowMapToArray(state.colPins),
+      rows: colRowMapToArray(state.rowPins),
     },
     layouts: {
       LAYOUT_all: {
-        layout: matrixToLayout(state.matrix, state.rowNames, state.colNames),
+        layout: matrixToLayout(state.keys),
       },
     },
   };

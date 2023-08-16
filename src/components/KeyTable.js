@@ -35,8 +35,12 @@ export function KeyTable({ state, setState }) {
   };
 
   const updateCol = (e) => {
-    const col = state.colPins.get(e.target.id);
-    col.pin = e.target.value;
+    const cols = state.colPins;
+    cols[e.target.id] = e.target.value;
+    setState((state) => ({
+      ...state,
+      colPins: cols,
+    }));
   };
 
   const updateEnable = (e) => {

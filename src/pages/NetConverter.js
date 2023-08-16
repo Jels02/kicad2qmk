@@ -8,6 +8,7 @@ import {
   writeInfoJson,
   writeKeymap,
   writeConfig,
+  addRowColNumbers,
 } from "../components/fileWriter";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -29,7 +30,7 @@ export default function NetConverter() {
     rowPrefix: "",
     colPrefix: "",
   });
-  const [params, setParams] = useState({
+  const defaultParams = {
     vendorID: "0xFEED",
     productID: "0xFFFF",
     deviceVer: "0.0.1",
@@ -37,7 +38,8 @@ export default function NetConverter() {
     url: "Link to website",
     maintainer: "Maintainer Name",
     manufacturer: "Manufacurer Name",
-  });
+  };
+  const [params, setParams] = useState(defaultParams);
 
   const handleNetRead = (e) => {
     try {
@@ -121,6 +123,8 @@ export default function NetConverter() {
     const errors = validState();
     if (errors.length === 0) {
       setErrors([]);
+      addRowColNumbers(state, setState);
+      console.log(state);
       const infoJson = writeInfoJson(state, params);
       const keymap = writeKeymap(state, params.maintainer);
       const config = writeConfig(state, params);
@@ -192,7 +196,6 @@ export default function NetConverter() {
       alert("Copied to clipboard");
     });
   }
-
   return (
     <div className="App">
       <div className="intro">
